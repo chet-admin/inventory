@@ -46,11 +46,11 @@
         </tr>
         </tfoot>
       </table>
-      <div class="alert alert-success" role="alert" id = "discountAlert" style="display:none">
+      <div class="alert alert-success" role="alert" id = "discountAlert" style="display:none" >
         <h4 class="alert-heading">Congratulations !</h4>
         <p>Your total amount is exceeding 1000 ,you will get discount of 10% ,the final amount will be shown at checkout</p>
         <hr>
-        <h5>After discount your total amount will be {{discount}}</h5>
+        <h5 >After discount your total amount will be {{discount}}</h5>
       </div>
       <div class="alert alert-success" role="alert" id = "checkoutAlert" style="display:none" *ngIf = 'total<1000'>
         <h4 class="alert-heading">Checkout</h4>

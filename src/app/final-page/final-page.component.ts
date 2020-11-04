@@ -28,17 +28,14 @@ export class FinalPageComponent implements OnInit {
 
   totalPrice(){
     this.total = 0;
-    let val = document.getElementById('discountAlert');
-    console.log("val",val.id);
+     let val = document.getElementById('checkoutAlert');
+     console.log("val",val.id);
     val.style.display = "none";
-    // for(var i=0;i<this.products.length;i++){
-    //   this.total += (this.products[i].product_price * this.products[i].product_quality);
-    // }
     for (var ele of Object.keys(this.arrProds)){
       let objProd = this.arrProds[ele];
       this.total += (objProd.price * objProd.quantity);
       
-      if (this.total > 1000) {
+      if (this.total <1000) {
         val.style.display = "block";
       } else {
         val.style.display = "none";
@@ -48,8 +45,6 @@ export class FinalPageComponent implements OnInit {
 
   addToCart(pid){
     console.log(pid);
-    // this.total = 0;
-
     for (var ele of Object.keys(this.arrProds)){
       let objProd = this.arrProds[ele];
       if(objProd.id == pid){
@@ -62,49 +57,25 @@ export class FinalPageComponent implements OnInit {
   }
   removeFromCart(pid){
     console.log(pid);
-    // for(var i=0;i<this.products.length;i++){
-    //   if(this.products[i].product_id === pid)
-    //   {  
-    //     this.products.splice(i,1);
-    //   }           
-    // }
     for (var ele of Object.keys(this.arrProds)){
       let objProd = this.arrProds[ele];
       if(objProd.id == pid){
-        //this.total+= objProd.price;
         this.arrProds.splice(parseInt(ele),1);
       }
       }
     this.totalPrice();
-    console.log(this.arrProds);
   }
   addQuantity(pid){
-    console.log(pid);
-    // for(var i=0;i<this.arrProds.length;i++){
-    //   if(this.arrProds[i].quantity === pid)
-    //   {  
-    //     this.arrProds[i].quantity += 1;
-    //   }           
-    // }
     for (var ele of Object.keys(this.arrProds)){
       let objProd = this.arrProds[ele];
       if(objProd.id == pid){
         objProd.quantity +=1;
-        console.log("total",objProd.quantity);
       }
       }
     this.totalPrice();
-    console.log(this.arrProds);
   }
 
   delQuantity(pid){
-    console.log(pid);
-    // for(var i=0;i<this.products.length;i++){
-    //   if(this.products[i].product_id === pid)
-    //   {  
-    //     this.products[i].product_quality -= 1;
-    //   }           
-    // }
     for (var ele of Object.keys(this.arrProds)){
       let objProd = this.arrProds[ele];
       if(objProd.id == pid){
@@ -117,17 +88,15 @@ export class FinalPageComponent implements OnInit {
   }
   checkout(val){
     this.discount  = 0;
-    let value = document.getElementById('checkoutAlert');
-    console.log("value",value.id);
-    value.style.display = "none";
+    let disAlert = document.getElementById('discountAlert');
+    disAlert.style.display = "none";
   if(val>1000){
     let dis:number ;
      dis = 10/100;
-      this.discount = (val-(val* dis));
-      value.style.display = "none";
-      console.log(this.discount);
+      this.discount += (val-(val* dis));
+      disAlert.style.display = "block";
   }else{
-    value.style.display = "block";
+    disAlert.style.display = "none";
     
   }
   }
