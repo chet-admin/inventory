@@ -1,0 +1,62 @@
+
+
+<div class="container fluid">
+    <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quatity</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let prod of arrProds">
+              <td>{{prod.id}}</td>
+              <td><img src="{{prod.image}}" class="img-thumbnail" style="height:100px;width:100px;" /></td>
+              <td>{{prod.name}}</td>
+              <td>{{prod.price}}</td>
+              <td>
+                {{prod.quantity}}
+                <button class="btn btn-success btn-xs plus" (click)="addQuantity(prod.id)" >+</button>
+                <button class="btn btn-danger btn-xs minus" (click)="delQuantity(prod.id)" >-</button>
+               
+              </td>
+              <td>
+                <button class="btn btn-primary btn-md" (click)="addToCart(prod.id)" [disabled]="prod.quantity == 0">Add to cart</button>&nbsp;
+                <button class="btn btn-danger btn-md" (click)="removeFromCart(prod.id)">Remove from cart</button> 
+               <!--  <button class="btn btn-danger btn-sm" (click)="delpopup(list.product_id)">Delete</button> -->
+              </td>
+            </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>Total Price</td>
+            <td colspan="6" class="text-right">{{total | currency: 'INR' }}</td>
+          </tr>
+          <tr>
+            <td>
+                <!-- <button class="btn btn-primary btn-sm" (click)="getpopup(list)">View</button> &nbsp;-->
+                <button   class="btn btn-success btn-md"
+               (click)="checkout(total)" [disabled]="total == 0">Checkout</button> 
+              </td >
+              <td colspan="6" class="text-right">{{discount | currency: 'INR' }}</td>
+        </tr>
+        </tfoot>
+      </table>
+      <div class="alert alert-success" role="alert" id = "discountAlert" style="display:none">
+        <h4 class="alert-heading">Congratulations !</h4>
+        <p>Your total amount is exceeding 1000 ,you will get discount of 10% ,the final amount will be shown at checkout</p>
+        <hr>
+        <h5>After discount your total amount will be {{discount}}</h5>
+      </div>
+      <div class="alert alert-success" role="alert" id = "checkoutAlert" style="display:none" *ngIf = 'total<1000'>
+        <h4 class="alert-heading">Checkout</h4>
+        <p >Sorry you are not eligible for the discount.</p>
+        <hr>
+        <h5>Your total amount will be {{total}}</h5>
+      </div>
+</div>
+    
